@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DzenStaff — ИИ-сотрудники для работы</title>
+<meta name="description" content="DzenStaff: один ИИ-агент на все задачи или команда до 10 ИИ-агентов под управлением координатора. Забираем рутину — возвращаем время.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23111'/%3E%3Ctext x='16' y='22' font-family='Arial,sans-serif' font-size='15' font-weight='800' fill='%236FAF7D' text-anchor='middle'%3EDZ%3C/text%3E%3C/svg%3E">
+<meta property="og:title" content="DzenStaff — ИИ-сотрудники для работы">
+<meta property="og:description" content="Один ИИ-агент или команда до 10 агентов? Забираем рутину — возвращаем время.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="progress"><i id="scrollProgress"></i></div>
+
+<header class="container nav">
+  <a href="index.html" class="logo">DzenStaff</a>
+  <nav class="site-nav">
+    <a href="index.html" class="active">Главная</a>
+    <a href="pricing.html">Тарифы</a>
+    <a href="quiz.html">Диагностика</a>
+    <a href="contact.html">Контакты</a>
+  </nav>
+  <div class="nav-actions">
+    <span class="badge">ИИ-сотрудники для работы</span>
+  </div>
+</header>
+
+<main>
+<section class="container hero">
+  <div class="eyebrow">DzenStaff</div>
+  <h1>Забираем рутину —<br>возвращаем время</h1>
+  <p class="lead">Один ИИ-агент на все задачи или команда до 10 ИИ-агентов под управлением координатора. Выберите формат — и снимите рутину с себя или с команды уже в этом месяце.</p>
+  <div class="hero-actions">
+    <a class="btn cta-orange" href="quiz.html">Пройти диагностику →</a>
+    <a class="btn secondary" href="pricing.html">Смотреть тарифы</a>
+  </div>
+</section>
+
+<section class="container section" id="levels">
+  <div class="section-head">
+    <h2>Два уровня продукта</h2>
+    <p class="section-copy">Оба решают одну задачу — забирают рутину и возвращают время. Отличается масштаб.</p>
+  </div>
+  <div class="grid2">
+    <article class="card">
+      <span class="tag">PERSONAL</span>
+      <div class="product-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v18M3 12h18"/><circle cx="12" cy="12" r="8"/></svg>
+      </div>
+      <h3>Один агент на все задачи</h3>
+      <p>Универсальный ИИ-агент переключается между ролями: юрист, маркетолог, дизайнер, ассистент и другие.</p>
+      <ul class="feature-list">
+        <li><span class="check">✓</span>Работа последовательно, в одном окне</li>
+        <li><span class="check">✓</span>Снятие личной административной рутины</li>
+        <li><span class="check">✓</span>Для фрилансеров, ИП, экспертов и специалистов</li>
+      </ul>
+      <div class="price">1 999 ₽ <small>пилот / первый месяц</small></div>
+      <div class="small">Далее 3 000 ₽/мес</div>
+    </article>
+
+    <article class="card">
+      <span class="tag">BUSINESS</span>
+      <div class="product-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="7" height="7" rx="2"/><rect x="14" y="4" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/><path d="M10 7.5h4M10 17.5h4M7 11v3M17 11v3"/></svg>
+      </div>
+      <h3>Команда до 10 агентов</h3>
+      <p>Специализированные ИИ-сотрудники работают параллельно: маркетолог, финансист, продавец, аналитик, дизайнер и другие.</p>
+      <ul class="feature-list">
+        <li><span class="check">✓</span>До 10 агентов одновременно</li>
+        <li><span class="check">✓</span>Состав под задачи конкретного бизнеса</li>
+        <li><span class="check">✓</span>Координатор ведёт клиента и ИИ-команду</li>
+      </ul>
+      <div class="price">5 000 ₽ <small>пилот</small></div>
+      <div class="small">Внедрение 59 900 ₽ · далее 9 900 ₽/мес</div>
+    </article>
+  </div>
+
+  <div class="coordinator">
+    <div class="coord-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="8" r="3"/><path d="M5 20c.8-3.5 3.1-5.5 7-5.5s6.2 2 7 5.5"/><path d="M4 5h3M17 5h3"/></svg>
+    </div>
+    <div>
+      <span class="tag" style="background:#292929;color:#fff">КЛЮЧЕВОЙ ЭЛЕМЕНТ BUSINESS</span>
+      <h3>Координатор</h3>
+      <p>Подбирает роли, выстраивает взаимодействие, отвечает за результат и помогает масштабировать ИИ-команду вместе с ростом задач бизнеса. Сопровождение продолжается и после внедрения.</p>
+    </div>
+  </div>
+
+  <div class="hero-actions" style="margin-top:26px">
+    <a class="btn small" href="pricing.html">Подробные тарифы и сравнение →</a>
+  </div>
+</section>
+
+<section class="container section">
+  <div class="section-head">
+    <h2>Кому подходит?</h2>
+  </div>
+  <div class="grid2">
+    <div class="card">
+      <span class="tag">PERSONAL</span>
+      <h3>«Убрать рутину у себя»</h3>
+      <p>Фрилансеры, наёмные сотрудники, ИП, юристы, бухгалтеры, консультанты, блогеры-эксперты и специалисты без собственной команды.</p>
+    </div>
+    <div class="card">
+      <span class="tag">BUSINESS</span>
+      <h3>«Закрыть или усилить функции»</h3>
+      <p>Малый и средний бизнес, действующие команды, компании с высокой процессной нагрузкой и стартапы.</p>
+    </div>
+  </div>
+</section>
+
+<section class="container section">
+  <div class="section-head">
+    <h2>Как это работает</h2>
+    <p class="section-copy">От выбора формата до первой закрытой задачи — три коротких шага.</p>
+  </div>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <h3>Выбираете формат</h3>
+      <p style="color:#666">Проходите диагностику или сразу пишете в один из ботов — Personal или Business.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <h3>Короткий брифинг</h3>
+      <p style="color:#666">В боте описываете свою рутину и задачи. Для Business координатор сам подбирает состав ролей.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <h3>Пилот стартует</h3>
+      <p style="color:#666">Агент или команда включаются в работу на пилотный месяц. Не подошло — отменяете в любой момент.</p>
+    </div>
+  </div>
+</section>
+
+<section class="container section">
+  <div class="section-head">
+    <h2>Business-команда</h2>
+    <p class="section-copy">Состав собирается под конкретные процессы.</p>
+  </div>
+  <div class="roles">
+    <div class="role"><strong>Юрист</strong><span>документы и юридические задачи</span></div>
+    <div class="role"><strong>Финансист</strong><span>финансовая аналитика</span></div>
+    <div class="role"><strong>Маркетолог</strong><span>маркетинг и контент</span></div>
+    <div class="role"><strong>Продавец</strong><span>продажи и коммуникации</span></div>
+    <div class="role"><strong>Аналитик</strong><span>данные и исследования</span></div>
+    <div class="role"><strong>Дизайнер</strong><span>визуальные материалы</span></div>
+    <div class="role"><strong>Ассистент</strong><span>операционные задачи</span></div>
+    <div class="role"><strong>Аутрич-менеджер</strong><span>поиск и первичные коммуникации</span></div>
+    <div class="role"><strong>Техспец</strong><span>технические процессы</span></div>
+  </div>
+</section>
+
+<section class="container cta">
+  <h2>Не знаете, с чего начать?</h2>
+  <p>Пройдите короткую диагностику — 5 вопросов подскажут, нужен вам один универсальный агент или команда под координатором.</p>
+  <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center">
+    <a class="btn cta-orange" href="quiz.html">Пройти диагностику →</a>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <span>© DzenStaff</span>
+    <div class="foot-links">
+      <a href="index.html">Главная</a>
+      <a href="pricing.html">Тарифы</a>
+      <a href="quiz.html">Диагностика</a>
+      <a href="contact.html">Контакты</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+window.addEventListener('scroll',()=>{
+ const h=document.documentElement.scrollHeight-innerHeight;
+ document.getElementById('scrollProgress').style.width=(h>0?scrollY/h*100:0)+'%';
+});
+</script>
+</body>
+</html>

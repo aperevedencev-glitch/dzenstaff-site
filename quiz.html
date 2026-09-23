@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Диагностика — какой DzenStaff вам нужен?</title>
+<meta name="description" content="Ответьте на 5 вопросов и узнайте, подойдёт ли вам Personal — один универсальный ИИ-агент, или Business — команда до 10 ИИ-агентов.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23111'/%3E%3Ctext x='16' y='22' font-family='Arial,sans-serif' font-size='15' font-weight='800' fill='%236FAF7D' text-anchor='middle'%3EDZ%3C/text%3E%3C/svg%3E">
+<meta property="og:title" content="DzenStaff — какой уровень ИИ-команды нужен вам?">
+<meta property="og:description" content="Пройдите диагностику за 60 секунд: один ИИ-агент или команда до 10 агентов?">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="progress"><i id="scrollProgress"></i></div>
+
+<header class="container nav">
+  <a href="index.html" class="logo">DzenStaff</a>
+  <nav class="site-nav">
+    <a href="index.html">Главная</a>
+    <a href="pricing.html">Тарифы</a>
+    <a href="quiz.html" class="active">Диагностика</a>
+    <a href="contact.html">Контакты</a>
+  </nav>
+  <div class="nav-actions">
+    <span class="badge">ИИ-сотрудники для работы</span>
+  </div>
+</header>
+
+<main>
+<section class="container hero compact">
+  <div class="eyebrow">Интерактивный гид</div>
+  <h1 style="font-size:clamp(34px,5.5vw,58px)">Один ИИ-агент или целая команда?</h1>
+  <p class="lead">Ответьте на 5 вопросов и определите, какой уровень DzenStaff подходит вашей ситуации: Personal или Business.</p>
+</section>
+
+<section class="container section tight" id="quiz">
+  <div class="quiz">
+    <div class="quiz-top">
+      <div><span class="eyebrow" style="color:#999">Диагностика</span><br><strong>5 вопросов</strong></div>
+      <span id="qCount">1 / 5</span>
+    </div>
+    <div class="quiz-progress"><i id="qBar"></i></div>
+    <div id="questionBox"></div>
+    <div class="result" id="result"></div>
+  </div>
+</section>
+
+<section class="container cta">
+  <h2>Осталось только попробовать</h2>
+  <p>Выберите своего DzenStaff и задайте ему пару нестандартных вопросов. Уверены, вам будет интересно.</p>
+  <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center">
+    <a class="btn cta-orange" href="https://t.me/dzenstaff_researcher_bot?start=trfc001" target="_blank" rel="noopener">Выбрать · Personal →</a>
+    <a class="btn cta-orange" href="https://t.me/DS_Emil_bot?start=trfc001" target="_blank" rel="noopener">Выбрать · Business →</a>
+  </div>
+  <p style="margin-top:18px"><a class="btn small secondary" href="pricing.html">Смотреть полные тарифы →</a></p>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <span>© DzenStaff</span>
+    <div class="foot-links">
+      <a href="index.html">Главная</a>
+      <a href="pricing.html">Тарифы</a>
+      <a href="quiz.html">Диагностика</a>
+      <a href="contact.html">Контакты</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const questions=[
+ {q:"Что вы хотите изменить в первую очередь?",o:[
+  ["A","Освободить собственное время","P"],["B","Снять рутину с моей команды","B"],
+  ["C","Закрыть несколько функций бизнеса","B"],["D","Масштабировать процессы","B"]]},
+ {q:"Кто будет основным пользователем DzenStaff?",o:[
+  ["A","Только я","P"],["B","Я и несколько сотрудников","B"],
+  ["C","Целая команда","B"],["D","Несколько подразделений","B"]]},
+ {q:"Какой масштаб задач вы хотите делегировать?",o:[
+  ["A","Несколько моих повседневных задач","P"],["B","Несколько бизнес-функций","B"],
+  ["C","Большой набор процессов","B"],["D","Пока не знаю","P"]]},
+ {q:"Какой результат звучит ближе?",o:[
+  ["A","«Хочу перестать делать рутину сам»","P"],["B","«Хочу разгрузить сотрудников»","B"],
+  ["C","«Хочу закрыть отсутствующие функции»","B"],["D","«Хочу построить масштабируемую систему»","B"]]},
+ {q:"Как вы предпочитаете работать с ИИ?",o:[
+  ["A","Один универсальный помощник","P"],["B","Несколько специализированных ролей","B"],
+  ["C","Команда агентов, работающих одновременно","B"],["D","Неважно, главное — результат","B"]]}
+];
+let current=0,scoreP=0,scoreB=0;
+const box=document.getElementById('questionBox'), result=document.getElementById('result');
+function render(){
+ const q=questions[current];
+ document.getElementById('qCount').textContent=`${current+1} / ${questions.length}`;
+ document.getElementById('qBar').style.width=((current)/questions.length*100+20)+'%';
+ box.innerHTML=`<h3 class="question">${q.q}</h3><div class="options">${q.o.map((x,i)=>`
+ <button class="option" onclick="answer('${x[2]}')"><span class="letter">${x[0]}</span><span>${x[1]}</span></button>`).join('')}</div>`;
+}
+function answer(type){
+ type==='P'?scoreP++:scoreB++;
+ current++;
+ if(current<questions.length){render();return}
+ document.getElementById('qBar').style.width='100%';
+ box.classList.add('hidden');
+ const personal=scoreP>=scoreB;
+ result.className='result show';
+ result.innerHTML=personal?`
+   <span class="tag">ПРЕДВАРИТЕЛЬНЫЙ РЕЗУЛЬТАТ</span>
+   <div class="result-title">Вам ближе<br>PERSONAL</div>
+   <div class="result-card">
+     <h3>Один ИИ-агент на все задачи</h3>
+     <p>Ваш сценарий больше похож на задачу «убрать рутину у себя». Универсальный агент переключается между ролями и помогает закрывать разные задачи в одном окне: документы, исследования, тексты, анализ, маркетинговые и административные задачи.</p>
+     <ul class="feature-list" style="margin-top:16px">
+       <li><span class="check">✓</span>Начинаете уже сегодня — без найма и обучения человека</li>
+       <li><span class="check">✓</span>Первый месяц — пилот по сниженной цене, отменить можно в любой момент</li>
+       <li><span class="check">✓</span>В боте — короткий брифинг по вашей рутине и первая задача в работе</li>
+     </ul>
+     <strong class="accent">Пилот: 1 999 ₽ · далее 3 000 ₽/мес</strong>
+     <div class="result-actions">
+       <a class="btn cta-orange" href="https://t.me/dzenstaff_researcher_bot?start=trfc001" style="text-decoration:none">Выбрать Personal →</a>
+       <button class="btn secondary" onclick="restart()">Пройти заново</button>
+     </div>
+   </div>`:`
+   <span class="tag">ПРЕДВАРИТЕЛЬНЫЙ РЕЗУЛЬТАТ</span>
+   <div class="result-title">Вам ближе<br>BUSINESS</div>
+   <div class="result-card">
+     <h3>Команда до 10 ИИ-агентов</h3>
+     <p>Ваш сценарий больше похож на задачу «закрыть или усилить функции бизнеса». Состав команды формируется под процессы, а координатор помогает управлять взаимодействием и масштабировать систему.</p>
+     <ul class="feature-list" style="margin-top:16px">
+       <li><span class="check">✓</span>Координатор сам подбирает роли под ваши задачи — не нужно составлять ТЗ на каждого агента</li>
+       <li><span class="check">✓</span>Дешевле одного junior-специалиста, а команда работает 24/7</li>
+       <li><span class="check">✓</span>Сопровождение продолжается и после внедрения, состав растёт вместе с задачами</li>
+     </ul>
+     <strong class="accent">Пилот: 5 000 ₽ · внедрение 59 900 ₽ · далее 9 900 ₽/мес</strong>
+     <div class="result-actions">
+       <a class="btn cta-orange" href="https://t.me/DS_Emil_bot?start=trfc001" style="text-decoration:none">Выбрать Business →</a>
+       <button class="btn secondary" onclick="restart()">Пройти заново</button>
+     </div>
+   </div>`;
+}
+function restart(){current=0;scoreP=0;scoreB=0;box.classList.remove('hidden');result.className='result';render();document.getElementById('quiz').scrollIntoView({behavior:'smooth'});}
+render();
+window.addEventListener('scroll',()=>{
+ const h=document.documentElement.scrollHeight-innerHeight;
+ document.getElementById('scrollProgress').style.width=(h>0?scrollY/h*100:0)+'%';
+});
+</script>
+</body>
+</html>
