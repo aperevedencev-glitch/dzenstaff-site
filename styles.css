@@ -53,7 +53,8 @@ td,th{overflow-wrap:anywhere;word-break:normal}
 .site-nav a:hover{color:var(--ink)}
 .site-nav a.active{color:var(--ink);border-bottom-color:var(--green)}
 .nav-actions{display:flex;align-items:center;gap:14px}
-.badge{font-size:12px;padding:7px 11px;border:1px solid var(--line);border-radius:999px;background:#fff;color:#555}
+.badge{font-size:12px;padding:7px 11px;border:1px solid var(--line);border-radius:999px;background:#fff;color:#555;text-decoration:none;display:inline-flex;align-items:center;transition:.2s}
+a.badge:hover{border-color:var(--green);color:var(--ink);background:#fbfbfa}
 @media (max-width:640px){
   .nav{padding:16px 0}
   .site-nav{width:100%;order:3;justify-content:center;gap:16px}
