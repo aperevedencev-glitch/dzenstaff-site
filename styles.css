@@ -133,10 +133,18 @@ h2.small{font-size:clamp(24px,3.4vw,32px)}
   .request-mascot{width:130px}
 }
 .crm-form-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:36px;max-width:520px;margin:0 auto;box-shadow:0 8px 35px rgba(0,0,0,.025)}
-.crm-form-mock{display:grid;gap:12px}
-.crm-form-field{border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:14px;color:#aaa;background:#fbfbfa}
-.crm-form-field.crm-form-btn{background:#111;color:#fff;text-align:center;font-weight:700;border-color:#111;cursor:default}
-.crm-form-note{margin-top:18px;font-size:13px;color:#888;text-align:center;line-height:1.6}
+#leadForm{display:grid;gap:12px}
+.crm-form-field-wrap{display:block}
+.crm-input{width:100%;border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:14px;color:var(--ink);background:#fbfbfa;font-family:inherit}
+.crm-input::placeholder{color:#aaa}
+.crm-input:focus{outline:none;border-color:var(--green);background:#fff}
+button.crm-input.crm-form-btn{background:#111;color:#fff;text-align:center;font-weight:700;border-color:#111;cursor:pointer;transition:.2s}
+button.crm-input.crm-form-btn:hover{transform:translateY(-1px);box-shadow:0 10px 20px rgba(0,0,0,.15)}
+button.crm-input.crm-form-btn:disabled{opacity:.6;cursor:default;transform:none;box-shadow:none}
+.crm-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.crm-form-note{margin-top:6px;font-size:13px;color:#888;text-align:center;line-height:1.6}
+.crm-form-note.crm-form-success{color:var(--green);font-weight:600}
+.crm-form-note.crm-form-error{color:#c0392b;font-weight:600}
 
 /* ---------- comparison table ---------- */
 .table-wrap{overflow:auto;background:#fff;border:1px solid var(--line);border-radius:20px}

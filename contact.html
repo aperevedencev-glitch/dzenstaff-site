@@ -86,16 +86,19 @@
     </div>
   </div>
   <div class="request-form-row">
-    <div class="crm-form-card">
-      <!-- CRM-FORM-EMBED: сюда вставляется код формы из CRM (Bitrix24 / amoCRM) -->
-      <div class="crm-form-placeholder">
-        <div class="crm-form-mock">
-          <div class="crm-form-field"><span>Имя</span></div>
-          <div class="crm-form-field"><span>Телефон или email</span></div>
-          <div class="crm-form-field crm-form-btn">Отправить заявку</div>
+    <div class="crm-form-card" id="crmFormCard">
+      <form id="leadForm" novalidate>
+        <div class="crm-form-field-wrap">
+          <input class="crm-input" type="text" id="leadName" name="name" placeholder="Имя" autocomplete="name" required>
         </div>
-        <p class="crm-form-note">Форма подключается — совсем скоро здесь можно будет оставить заявку напрямую. Пока быстрее всего написать в Telegram выше.</p>
-      </div>
+        <div class="crm-form-field-wrap">
+          <input class="crm-input" type="text" id="leadContact" name="contact" placeholder="Телефон или email" autocomplete="tel" required>
+        </div>
+        <!-- honeypot: скрытое поле-ловушка от ботов -->
+        <div class="crm-hp" aria-hidden="true"><input type="text" id="leadCompany" name="company" tabindex="-1" autocomplete="off"></div>
+        <button class="crm-input crm-form-btn" type="submit" id="leadSubmit">Отправить заявку</button>
+        <p class="crm-form-note" id="leadStatus">Мы не передаём данные третьим лицам — только свяжемся с вами по указанному контакту.</p>
+      </form>
     </div>
     <img class="request-mascot" src="assets/robot-point-left.png" alt="DzenStaff — робот-агент показывает на форму заявки" width="640" height="860" loading="lazy">
   </div>
@@ -140,6 +143,81 @@ window.addEventListener('scroll',()=>{
  const h=document.documentElement.scrollHeight-innerHeight;
  document.getElementById('scrollProgress').style.width=(h>0?scrollY/h*100:0)+'%';
 });
+</script>
+
+<script>
+(function(){
+  var WEBHOOK = 'https://b24-ebbllb.bitrix24.ru/rest/1/65l14ybnpvehavv8/';
+  var form = document.getElementById('leadForm');
+  var status = document.getElementById('leadStatus');
+  var submitBtn = document.getElementById('leadSubmit');
+  var defaultNote = status.textContent;
+
+  function setStatus(text, kind){
+    status.textContent = text;
+    status.className = 'crm-form-note' + (kind ? ' ' + kind : '');
+  }
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+
+    // honeypot: если скрытое поле заполнено — это бот, тихо игнорируем
+    if (document.getElementById('leadCompany').value) {
+      form.reset();
+      return;
+    }
+
+    var name = document.getElementById('leadName').value.trim();
+    var contact = document.getElementById('leadContact').value.trim();
+
+    if (!name || !contact) {
+      setStatus('Заполните имя и телефон или email.', 'crm-form-error');
+      return;
+    }
+
+    var isEmail = contact.indexOf('@') !== -1;
+    var fields = {
+      TITLE: 'Заявка с сайта DzenStaff',
+      NAME: name,
+      SOURCE_ID: 'WEB',
+      SOURCE_DESCRIPTION: 'Форма на contact.html'
+    };
+    if (isEmail) {
+      fields.EMAIL = [{ VALUE: contact, VALUE_TYPE: 'WORK' }];
+    } else {
+      fields.PHONE = [{ VALUE: contact, VALUE_TYPE: 'WORK' }];
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Отправляем…';
+    setStatus(defaultNote, '');
+
+    fetch(WEBHOOK + 'crm.lead.add.json', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ fields: fields })
+    })
+      .then(function(r){ return r.json(); })
+      .then(function(data){
+        if (data && data.result) {
+          form.reset();
+          setStatus('Спасибо! Заявка отправлена — свяжемся с вами в ближайшее время.', 'crm-form-success');
+          // переносим сообщение из формы в карточку и скрываем поля, чтобы нельзя было отправить повторно
+          document.getElementById('crmFormCard').appendChild(status);
+          form.hidden = true;
+        } else {
+          throw new Error((data && data.error_description) || 'unknown error');
+        }
+      })
+      .catch(function(){
+        setStatus('Не получилось отправить форму. Напишите нам в Telegram выше — так быстрее всего.', 'crm-form-error');
+      })
+      .finally(function(){
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Отправить заявку';
+      });
+  });
+})();
 </script>
 </body>
 </html>
