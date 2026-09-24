@@ -20,4 +20,14 @@
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
+  <url>
+    <loc>https://aperevedencev-glitch.github.io/dzenstaff-site/blog/index.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://aperevedencev-glitch.github.io/dzenstaff-site/blog/kak-ii-agenty-zakryvayut-rutinu-v-malom-biznese.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
 </urlset>

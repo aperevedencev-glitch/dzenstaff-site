@@ -201,6 +201,27 @@ td:not(:first-child){font-weight:500;color:#444}
   .cta-mascot{width:150px;order:-1}
 }
 
+/* ---------- blog ---------- */
+.blog-list{display:grid;gap:16px;max-width:760px;margin:0 auto}
+.blog-card{display:block;text-decoration:none;color:inherit;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:28px 30px;transition:.2s}
+.blog-card:hover{box-shadow:var(--shadow);transform:translateY(-2px)}
+.blog-card .tag{margin-bottom:14px}
+.blog-card h3{font-size:22px;letter-spacing:-.03em;margin:0 0 8px}
+.blog-card p{color:#666;margin:0}
+.blog-card .blog-meta{margin-top:14px;font-size:13px;color:#999}
+.article{max-width:720px;margin:0 auto}
+.article-meta{display:flex;gap:10px;align-items:center;color:#999;font-size:13px;margin-bottom:14px}
+.article h1{font-size:clamp(32px,5vw,48px)}
+.article-body{font-size:17px;line-height:1.75;color:#333}
+.article-body h2{font-size:clamp(24px,3.2vw,30px);letter-spacing:-.03em;margin:44px 0 16px}
+.article-body h2:first-child{margin-top:0}
+.article-body p{margin:0 0 18px}
+.article-body strong{color:var(--ink)}
+.article-cta{margin:44px 0 0;background:#111;border-radius:22px;padding:28px 32px;text-align:center}
+.article-cta p{color:#fff;font-weight:700;font-size:19px;margin:0 0 16px}
+.article-back{display:inline-block;margin-bottom:28px;font-size:13px;font-weight:600;color:#888;text-decoration:none}
+.article-back:hover{color:var(--ink)}
+
 footer.site-footer{padding:35px 0 60px;color:#888;font-size:13px}
 footer.site-footer .container{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 footer.site-footer .foot-links{display:flex;gap:18px;flex-wrap:wrap}
