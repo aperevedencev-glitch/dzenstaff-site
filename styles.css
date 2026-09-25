@@ -222,6 +222,11 @@ td:not(:first-child){font-weight:500;color:#444}
 .article-back{display:inline-block;margin-bottom:28px;font-size:13px;font-weight:600;color:#888;text-decoration:none}
 .article-back:hover{color:var(--ink)}
 
+/* ---------- quiz hero (rocket mascot) ---------- */
+.quiz-hero-grid{gap:32px}
+.quiz-hero-media img{border-radius:0;box-shadow:none;filter:drop-shadow(0 18px 30px rgba(0,0,0,.18));max-width:380px;margin:0 auto;display:block}
+@media (max-width:900px){.quiz-hero-media img{max-width:260px}}
+
 footer.site-footer{padding:35px 0 60px;color:#888;font-size:13px}
 footer.site-footer .container{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 footer.site-footer .foot-links{display:flex;gap:18px;flex-wrap:wrap}
