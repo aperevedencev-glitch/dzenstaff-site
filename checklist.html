@@ -42,6 +42,19 @@
 .checklist-whats .c .n{display:inline-flex;width:20px;height:20px;border-radius:6px;background:var(--soft,#f1f1ee);color:var(--green,#6FAF7D);font-size:11px;font-weight:800;align-items:center;justify-content:center;margin-bottom:6px}
 @media(max-width:760px){.checklist-whats{grid-template-columns:1fr 1fr}}
 </style>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=113068025', 'ym');
+
+    ym(113068025, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/113068025" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
 </head>
 <body>
 <div class="progress"><i id="scrollProgress"></i></div>
@@ -120,13 +133,34 @@
   </div>
 </section>
 
+<section class="container section tight" id="leadCapture">
+  <div class="crm-form-card">
+    <span class="tag">РАЗБОР</span>
+    <h3 style="font-size:20px;margin-top:10px">Получить разбор по вашим ответам</h3>
+    <p style="color:var(--muted,#737373);margin:8px 0 20px">Оставьте контакт — пришлём короткий разбор: с каких отмеченных задач агенту стоит начать в первую неделю и сколько это будет стоить.</p>
+    <form id="checklistLeadForm" novalidate>
+      <div class="crm-form-field-wrap">
+        <input class="crm-input" type="text" id="clName" name="name" placeholder="Имя" autocomplete="name" required>
+      </div>
+      <div class="crm-form-field-wrap">
+        <input class="crm-input" type="text" id="clContact" name="contact" placeholder="Телефон или email" autocomplete="tel" required>
+      </div>
+      <!-- honeypot: скрытое поле-ловушка от ботов -->
+      <div class="crm-hp" aria-hidden="true"><input type="text" id="clCompany" name="company" tabindex="-1" autocomplete="off"></div>
+      <button class="crm-input crm-form-btn" type="submit" id="clSubmit">Получить разбор</button>
+      <p class="crm-form-note" id="clStatus">Отправим разбор в течение дня — свяжемся по указанному контакту.</p>
+    </form>
+  </div>
+</section>
+
 <section class="container cta with-mascot">
   <img class="cta-mascot" src="assets/robot-question.png" alt="DzenStaff — робот-агент задумался над вопросом, какой формат выбрать" width="644" height="1254" loading="lazy">
   <div class="cta-copy">
     <h2>Не уверены, с чего начать?</h2>
     <p>Короткая диагностика — 5 вопросов — покажет, нужен вам один универсальный агент или команда под координатором, и с каких задач из списка выше агент начнёт в первую неделю.</p>
     <div style="display:flex;gap:12px;flex-wrap:wrap">
-      <a class="btn cta-orange" href="quiz.html">Пройти диагностику →</a>
+      <a class="btn cta-orange" id="checklistQuizLink" href="quiz.html?utm_source=checklist&amp;utm_medium=cta&amp;utm_campaign=checklist_funnel">Пройти диагностику →</a>
+      <a class="btn secondary" id="checklistBotLink" href="https://t.me/dzenstaff_researcher_bot?start=trfc_checklist" target="_blank" rel="noopener">Написать в Telegram →</a>
     </div>
   </div>
 </section>
@@ -172,12 +206,22 @@ window.addEventListener('scroll',()=>{
   }
 
   var state = loadState();
+  var allCheckedGoalSent = false;
+
+  function ymGoal(name){
+    try { if (typeof window.ym === 'function') window.ym(113068025, 'reachGoal', name); } catch (e) {}
+  }
+  window.dzenYmGoal = ymGoal;
 
   function updateProgress(){
     var checked = items.filter(function(it){ return it.classList.contains('checked'); }).length;
     var pct = total ? Math.round(checked / total * 100) : 0;
     if (fill) fill.style.width = pct + '%';
     if (label) label.textContent = checked + ' из ' + total + ' отмечено';
+    if (total && checked === total && !allCheckedGoalSent) {
+      allCheckedGoalSent = true;
+      ymGoal('checklist_all_checked');
+    }
   }
 
   items.forEach(function(item){
@@ -192,6 +236,104 @@ window.addEventListener('scroll',()=>{
   });
 
   updateProgress();
+
+  // Список отмеченных пунктов текстом — для формы разбора ниже
+  window.getCheckedChecklistItems = function(){
+    return items
+      .filter(function(it){ return it.classList.contains('checked'); })
+      .map(function(it){
+        var txt = it.querySelector('.txt');
+        return txt ? txt.textContent.trim() : '';
+      })
+      .filter(Boolean);
+  };
+
+  var quizLink = document.getElementById('checklistQuizLink');
+  if (quizLink) quizLink.addEventListener('click', function(){ ymGoal('checklist_quiz_click'); });
+  var botLink = document.getElementById('checklistBotLink');
+  if (botLink) botLink.addEventListener('click', function(){ ymGoal('checklist_bot_click'); });
+})();
+</script>
+
+<script>
+(function(){
+  var WEBHOOK = 'https://b24-ebbllb.bitrix24.ru/rest/1/65l14ybnpvehavv8/';
+  var form = document.getElementById('checklistLeadForm');
+  if (!form) return;
+  var status = document.getElementById('clStatus');
+  var submitBtn = document.getElementById('clSubmit');
+  var defaultNote = status.textContent;
+
+  function setStatus(text, kind){
+    status.textContent = text;
+    status.className = 'crm-form-note' + (kind ? ' ' + kind : '');
+  }
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+
+    // honeypot: если скрытое поле заполнено — это бот, тихо игнорируем
+    if (document.getElementById('clCompany').value) {
+      form.reset();
+      return;
+    }
+
+    var name = document.getElementById('clName').value.trim();
+    var contact = document.getElementById('clContact').value.trim();
+
+    if (!name || !contact) {
+      setStatus('Заполните имя и телефон или email.', 'crm-form-error');
+      return;
+    }
+
+    var checked = (typeof window.getCheckedChecklistItems === 'function') ? window.getCheckedChecklistItems() : [];
+    var comment = checked.length
+      ? 'Отмечено в чек-листе (' + checked.length + ' из 15):\n' + checked.map(function(t){ return '— ' + t; }).join('\n')
+      : 'Чек-лист открыт, пункты не отмечены.';
+
+    var isEmail = contact.indexOf('@') !== -1;
+    var fields = {
+      TITLE: 'Заявка с чек-листа DzenStaff',
+      NAME: name,
+      SOURCE_ID: 'WEB',
+      SOURCE_DESCRIPTION: 'Форма на checklist.html',
+      COMMENTS: comment
+    };
+    if (isEmail) {
+      fields.EMAIL = [{ VALUE: contact, VALUE_TYPE: 'WORK' }];
+    } else {
+      fields.PHONE = [{ VALUE: contact, VALUE_TYPE: 'WORK' }];
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Отправляем…';
+    setStatus(defaultNote, '');
+
+    fetch(WEBHOOK + 'crm.lead.add.json', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ fields: fields })
+    })
+      .then(function(r){ return r.json(); })
+      .then(function(data){
+        if (data && data.result) {
+          form.reset();
+          setStatus('Спасибо! Разбор пришлём в ближайшее время.', 'crm-form-success');
+          document.getElementById('leadCapture').querySelector('.crm-form-card').appendChild(status);
+          form.hidden = true;
+          if (typeof window.dzenYmGoal === 'function') window.dzenYmGoal('checklist_form_submit');
+        } else {
+          throw new Error((data && data.error_description) || 'unknown error');
+        }
+      })
+      .catch(function(){
+        setStatus('Не получилось отправить форму. Напишите нам в Telegram — так быстрее всего.', 'crm-form-error');
+      })
+      .finally(function(){
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Получить разбор';
+      });
+  });
 })();
 </script>
 </body>
