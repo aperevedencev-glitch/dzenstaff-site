@@ -239,3 +239,30 @@ footer.site-footer a:hover{color:var(--ink)}
   .card{padding:24px}
   .quiz{padding:24px}
 }
+
+/* ---------- checklist page ---------- */
+.checklist-intro{max-width:640px;color:var(--muted);margin:14px 0 26px}
+.checklist-progress-wrap{display:flex;align-items:center;gap:12px;margin:0 0 26px;max-width:720px}
+.checklist-progress-bar{flex:1;height:6px;background:var(--line);border-radius:999px;overflow:hidden}
+.checklist-progress-bar .fill{height:100%;width:0%;background:var(--green);border-radius:999px;transition:width .2s}
+.checklist-progress-label{font-size:13px;color:var(--muted);white-space:nowrap;flex:0 0 auto}
+
+.checklist-wrap{max-width:720px}
+.checklist-group{margin-bottom:26px}
+.checklist-group h3{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--green);margin:0 0 10px;display:flex;align-items:center;gap:8px}
+.checklist-group h3::before{content:"";width:16px;height:2px;background:var(--green);display:inline-block}
+.checklist-group h3 .note{color:var(--muted);font-weight:600;text-transform:none;letter-spacing:0}
+
+.checklist-item{display:flex;align-items:flex-start;gap:14px;padding:14px 12px;border-bottom:1px solid var(--line);cursor:pointer;border-radius:12px;user-select:none;-webkit-tap-highlight-color:transparent;transition:background .12s}
+.checklist-item:hover{background:var(--soft)}
+.checklist-item .box{flex:0 0 auto;width:20px;height:20px;border:1.8px solid var(--ink);border-radius:6px;margin-top:2px;position:relative;transition:background .12s,border-color .12s}
+.checklist-item .txt{font-size:15.5px;line-height:1.5;transition:color .12s}
+.checklist-item .txt b{font-weight:700}
+.checklist-item.checked .box{background:var(--green);border-color:var(--green)}
+.checklist-item.checked .box::after{content:"";position:absolute;left:6px;top:2px;width:5px;height:10px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(40deg)}
+.checklist-item.checked .txt{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--line)}
+
+.checklist-whats{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;max-width:760px;margin:22px 0 0}
+.checklist-whats .c{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 10px;font-size:12.5px;text-align:center}
+.checklist-whats .c .n{display:inline-flex;width:20px;height:20px;border-radius:6px;background:var(--soft);color:var(--green);font-size:11px;font-weight:800;align-items:center;justify-content:center;margin-bottom:6px}
+@media(max-width:760px){.checklist-whats{grid-template-columns:1fr 1fr}}

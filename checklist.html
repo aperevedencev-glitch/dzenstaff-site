@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Чек-лист: какие задачи отдать ИИ-агенту первыми — DzenStaff</title>
+<meta name="description" content="15 рутинных задач по 5 категориям — отметьте, что сейчас отнимает у вас время, и получите готовый список для первого брифинга ИИ-агента.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23111'/%3E%3Ctext x='16' y='22' font-family='Arial,sans-serif' font-size='15' font-weight='800' fill='%236FAF7D' text-anchor='middle'%3EDZ%3C/text%3E%3C/svg%3E">
+<meta property="og:title" content="Чек-лист: какие задачи отдать ИИ-агенту первыми">
+<meta property="og:description" content="15 рутинных задач по 5 категориям — отметьте, что сейчас отнимает у вас время.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="DzenStaff">
+<meta property="og:image" content="https://aperevedencev-glitch.github.io/dzenstaff-site/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://aperevedencev-glitch.github.io/dzenstaff-site/assets/og-image.png">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="progress"><i id="scrollProgress"></i></div>
+
+<header class="container nav">
+  <a href="index.html" class="logo">DzenStaff</a>
+  <nav class="site-nav">
+    <a href="index.html">Главная</a>
+    <a href="pricing.html">Тарифы</a>
+    <a href="quiz.html">Диагностика</a>
+    <a href="checklist.html" class="active">Чек-лист</a>
+    <a href="blog/index.html">Блог</a>
+    <a href="contact.html">Контакты</a>
+  </nav>
+  <div class="nav-actions">
+    <a href="quiz.html" class="badge">ИИ-сотрудники для работы</a>
+  </div>
+</header>
+
+<main>
+<section class="container hero compact">
+  <div class="eyebrow">Чек-лист</div>
+  <h1 style="font-size:clamp(34px,5.5vw,52px)">Какие задачи отдать ИИ-агенту первыми</h1>
+  <p class="checklist-intro">15 рутинных задач, с которых обычно начинают. Отметьте то, что сейчас отнимает время у вас — отметки сохранятся в этом браузере, и вы получите готовый список для первого брифинга агента.</p>
+
+  <div class="checklist-whats">
+    <div class="c"><div class="n">1</div><div>Входящие и переписка</div></div>
+    <div class="c"><div class="n">2</div><div>Документы и отчётность</div></div>
+    <div class="c"><div class="n">3</div><div>Календарь и напоминания</div></div>
+    <div class="c"><div class="n">4</div><div>Продажи и клиенты</div></div>
+    <div class="c"><div class="n">5</div><div>Аналитика и отчёты</div></div>
+  </div>
+</section>
+
+<section class="container section tight">
+  <div class="checklist-progress-wrap">
+    <div class="checklist-progress-bar"><div class="fill" id="progressFill"></div></div>
+    <div class="checklist-progress-label" id="progressLabel">0 из 15 отмечено</div>
+  </div>
+
+  <div class="checklist-wrap">
+    <div class="checklist-group">
+      <h3>Входящие и переписка</h3>
+      <div class="checklist-item" data-id="1"><div class="box"></div><div class="txt"><b>Сортировка входящих сообщений</b> по срочности и теме</div></div>
+      <div class="checklist-item" data-id="2"><div class="box"></div><div class="txt"><b>Ответы на типовые вопросы</b> — цена, формат работы, сроки</div></div>
+      <div class="checklist-item" data-id="3"><div class="box"></div><div class="txt"><b>Первичная квалификация заявки</b> перед тем, как передать её вам</div></div>
+    </div>
+
+    <div class="checklist-group">
+      <h3>Документы и отчётность</h3>
+      <div class="checklist-item" data-id="4"><div class="box"></div><div class="txt"><b>Формирование счетов и актов</b> по шаблону в конце месяца</div></div>
+      <div class="checklist-item" data-id="5"><div class="box"></div><div class="txt"><b>Учёт оплат</b> в таблице — без ручного поиска в переписке</div></div>
+      <div class="checklist-item" data-id="6"><div class="box"></div><div class="txt"><b>Сбор данных для отчёта</b> — свести цифры из разных источников в один файл</div></div>
+    </div>
+
+    <div class="checklist-group">
+      <h3>Календарь и напоминания</h3>
+      <div class="checklist-item" data-id="7"><div class="box"></div><div class="txt"><b>Согласование времени встречи</b> со свободными слотами в календаре</div></div>
+      <div class="checklist-item" data-id="8"><div class="box"></div><div class="txt"><b>Напоминания клиентам</b> за день до встречи или дедлайна</div></div>
+      <div class="checklist-item" data-id="9"><div class="box"></div><div class="txt"><b>Перенос и отмена записей</b> по правилам, которые вы задали заранее</div></div>
+    </div>
+
+    <div class="checklist-group">
+      <h3>Продажи и клиенты <span class="note">— актуально для команды</span></h3>
+      <div class="checklist-item" data-id="10"><div class="box"></div><div class="txt"><b>Ведение карточек клиентов в CRM</b> — обновление статусов по итогам звонков</div></div>
+      <div class="checklist-item" data-id="11"><div class="box"></div><div class="txt"><b>Follow-up после встречи</b> — резюме и следующий шаг клиенту</div></div>
+      <div class="checklist-item" data-id="12"><div class="box"></div><div class="txt"><b>Подготовка коммерческого предложения</b> по шаблону под запрос</div></div>
+    </div>
+
+    <div class="checklist-group">
+      <h3>Аналитика и рутинные отчёты <span class="note">— актуально для команды</span></h3>
+      <div class="checklist-item" data-id="13"><div class="box"></div><div class="txt"><b>Еженедельная сводка по заявкам и продажам</b> — без ручной сборки таблиц</div></div>
+      <div class="checklist-item" data-id="14"><div class="box"></div><div class="txt"><b>Мониторинг дедлайнов по проектам</b> и предупреждение о срывах</div></div>
+      <div class="checklist-item" data-id="15"><div class="box"></div><div class="txt"><b>Первичная обработка обратной связи</b> от клиентов — жалобы, отзывы, оценки</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="container cta with-mascot">
+  <img class="cta-mascot" src="assets/robot-question.png" alt="DzenStaff — робот-агент задумался над вопросом, какой формат выбрать" width="644" height="1254" loading="lazy">
+  <div class="cta-copy">
+    <h2>Не уверены, с чего начать?</h2>
+    <p>Короткая диагностика — 5 вопросов — покажет, нужен вам один универсальный агент или команда под координатором, и с каких задач из списка выше агент начнёт в первую неделю.</p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap">
+      <a class="btn cta-orange" href="quiz.html">Пройти диагностику →</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <span>© DzenStaff</span>
+    <div class="foot-links">
+      <a href="index.html">Главная</a>
+      <a href="pricing.html">Тарифы</a>
+      <a href="quiz.html">Диагностика</a>
+      <a href="checklist.html">Чек-лист</a>
+      <a href="blog/index.html">Блог</a>
+      <a href="contact.html">Контакты</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+window.addEventListener('scroll',()=>{
+ const h=document.documentElement.scrollHeight-innerHeight;
+ document.getElementById('scrollProgress').style.width=(h>0?scrollY/h*100:0)+'%';
+});
+</script>
+
+<script>
+(function(){
+  var STORAGE_KEY = 'dzenstaff-checklist-15';
+  var items = Array.prototype.slice.call(document.querySelectorAll('.checklist-item[data-id]'));
+  var total = items.length;
+  var fill = document.getElementById('progressFill');
+  var label = document.getElementById('progressLabel');
+
+  function loadState(){
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      return raw ? JSON.parse(raw) : {};
+    } catch (e) { return {}; }
+  }
+  function saveState(state){
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
+  }
+
+  var state = loadState();
+
+  function updateProgress(){
+    var checked = items.filter(function(it){ return it.classList.contains('checked'); }).length;
+    var pct = total ? Math.round(checked / total * 100) : 0;
+    if (fill) fill.style.width = pct + '%';
+    if (label) label.textContent = checked + ' из ' + total + ' отмечено';
+  }
+
+  items.forEach(function(item){
+    var id = item.getAttribute('data-id');
+    if (state[id]) item.classList.add('checked');
+    item.addEventListener('click', function(){
+      item.classList.toggle('checked');
+      state[id] = item.classList.contains('checked');
+      saveState(state);
+      updateProgress();
+    });
+  });
+
+  updateProgress();
+})();
+</script>
+</body>
+</html>
